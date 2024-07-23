@@ -117,6 +117,9 @@ async function main() {
 
   const hamBurger = document.querySelector("#hamburgerid");
   hamBurger.addEventListener("click", () => {
+
+    e.preventDefault();
+
     const leftSection = document.querySelector(".left-section");
     leftSection.style.left = "-11px";
   });
@@ -124,6 +127,9 @@ async function main() {
   //cloasing left side bar
   const closeBtn = document.querySelector(".close-button");
   closeBtn.addEventListener("click", () => {
+
+    e.preventDefault();
+
     const leftSection = document.querySelector(".left-section");
     leftSection.style.left = "-348px";
   });
