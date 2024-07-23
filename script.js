@@ -117,15 +117,16 @@ async function main() {
 
   const hamBurger = document.querySelector("#hamburgerid");
   hamBurger.addEventListener("click", () => {
-    document.querySelector(".left-section").style.left = "-11px";
+    const leftSection = document.querySelector(".left-section");
+    leftSection.style.left = "-11px";
   });
 
   //cloasing left side bar
   const closeBtn = document.querySelector(".close-button");
   closeBtn.addEventListener("click", () => {
-    document.querySelector(".left-section").style.left = "-348px";
+    const leftSection = document.querySelector(".left-section");
+    leftSection.style.left = "-348px";
   });
-
 }
 
 main();
