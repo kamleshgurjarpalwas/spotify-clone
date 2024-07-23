@@ -115,12 +115,14 @@ async function main() {
     currentSong.currentTime = (currentSong.duration * percent) / 100;
   });
 
-  document.querySelector("#hamburgerid").addEventListener("click", () => {
+  const hamBurger = document.querySelector("#hamburgerid");
+  hamBurger.addEventListener("click", () => {
     document.querySelector(".left-section").style.left = "-11px";
   });
 
   //cloasing left side bar
-  document.querySelector(".close-button").addEventListener("click", () => {
+  const closeBtn = document.querySelector(".close-button");
+  closeBtn.addEventListener("click", () => {
     document.querySelector(".left-section").style.left = "-348px";
   });
 
