@@ -461,6 +461,10 @@
   display: none;
 }
 
+.close-button{
+  display: none;
+}
+
 @media screen and (max-width: 900px) {
   .right-section {
     width: 56vw;
@@ -560,7 +564,7 @@
   }
 
   .hamburger{
-
+    cursor: pointer;
     display: block;
   }
 
@@ -582,5 +586,19 @@
 
   .song-time-in-mobile{
     float: right;
+  }
+
+  .close-button{
+    display: block;
+    filter: invert(1);
+  }
+  .close-button img {
+    width: 30px;
+    display: flex;
+    float: right;
+    position: relative;
+    top: 55px;
+    right: 20px;
+    cursor: pointer;
   }
 }

@@ -10,13 +10,18 @@ function updaterunningTime() {
 
     // Update the running time display
     document.querySelector(
-      ".running-time"
+      ".running-time",
+      ".song-time-in-mobile"
+    ).innerText = `${secondsToMinutesSeconds(
+      currentSong.currentTime
+    )}/${secondsToMinutesSeconds(currentSong.duration)}`;
+
+    document.querySelector(
+      ".song-time-in-mobile"
     ).innerText = `${secondsToMinutesSeconds(
       currentSong.currentTime
     )}/${secondsToMinutesSeconds(currentSong.duration)}`;
   });
-
-
 }
 
 function secondsToMinutesSeconds(seconds) {
@@ -60,7 +65,7 @@ function playMusic(track, e) {
   PLAYBTN.src = "stopBtn.svg";
   songName = e.getElementsByTagName("span")[0].innerText;
   document.querySelector(".running-song-name").innerText = songName;
-  document.querySelector(".songe-name-in-mobile").innerText = songName;
+  document.querySelector(".songe-name-in-mobile1").innerText = songName;
   updaterunningTime();
 }
 
@@ -111,10 +116,14 @@ async function main() {
   });
 
   document.querySelector("#hamburgerid").addEventListener("click", () => {
-    document.querySelector(".left-section").style.left = "-11px"
-})
+    document.querySelector(".left-section").style.left = "-11px";
+  });
+
+  //cloasing left side bar
+  document.querySelector(".close-button").addEventListener("click", () => {
+    document.querySelector(".left-section").style.left = "-348px";
+  });
+
 }
-
-
 
 main();
