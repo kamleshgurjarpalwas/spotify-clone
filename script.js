@@ -1,5 +1,6 @@
 let currentSong = new Audio();
 let songName;
+let currentSongPlayPuse;//this is store the image tag in list for play and puse funcationalities
 
 function updaterunningTime() {
   currentSong.addEventListener("timeupdate", () => {
@@ -10,7 +11,7 @@ function updaterunningTime() {
 
     // Update the running time display
     document.querySelector(
-      ".running-time",
+      ".time",
       ".song-time-in-mobile"
     ).innerText = `${secondsToMinutesSeconds(
       currentSong.currentTime
@@ -39,7 +40,7 @@ function secondsToMinutesSeconds(seconds) {
 }
 
 async function getSongs() {
-  let songs = await fetch("http://127.0.0.1:5500/songs/");
+  let songs = await fetch("http://127.0.0.1:5501/songs");
 
   let response = await songs.text();
 
@@ -60,8 +61,16 @@ async function getSongs() {
 
 function playMusic(track, e) {
   currentSong.pause();
+
+  if(currentSongPlayPuse)
+  currentSongPlayPuse.src="play.svg"
+  
   currentSong = new Audio("songs/" + track + ".mp3");
+  currentSongPlayPuse = e.getElementsByTagName("img")[1];
   currentSong.play();
+
+  currentSongPlayPuse.src = "stopBtn.svg";
+  
   PLAYBTN.src = "stopBtn.svg";
   songName = e.getElementsByTagName("span")[0].innerText;
   document.querySelector(".running-song-name").innerText = songName;
@@ -78,12 +87,12 @@ async function main() {
   for (let song of songs) {
     songsInUL.innerHTML =
       songsInUL.innerHTML +
-      `<li ><img src="music.svg" class="song-list-image" /> <span> ${song
+      `<li ><img style="width:6%" src="music.svg" class="song-list-image" /> <span style="width:60%"> ${song
         .slice(song.lastIndexOf("/") + 1, song.lastIndexOf("."))
         .replaceAll(
           "%20",
           " "
-        )}</span> <span><b>Kamlesh</b></span> <img src="play.svg" class="song-list-paly-btn" /> </li>`;
+        )}</span> <span style="width:30%" ><b>Kamlesh</b></span> <img id="${song}" style="width:4%" src="play.svg" class="song-list-paly-btn" /> </li>`;
   }
 
   //song start on click list element
@@ -91,19 +100,21 @@ async function main() {
     document.querySelector(".songsList").getElementsByTagName("li")
   ).forEach((e) => {
     e.addEventListener("click", () => {
-      console.log(e.getElementsByTagName("span")[0].innerText.trim());
       playMusic(e.getElementsByTagName("span")[0].innerText.trim(), e);
     });
   });
 
   //current song play and pose
   PLAYBTN.addEventListener("click", (e) => {
+
     if (currentSong.paused) {
       currentSong.play();
       PLAYBTN.src = "stopBtn.svg";
+      currentSongPlayPuse.src="stopBtn.svg";
     } else {
       currentSong.pause();
       PLAYBTN.src = "play.svg";
+      currentSongPlayPuse.src="play.svg";
     }
     console.log(e);
   });
@@ -116,20 +127,16 @@ async function main() {
   });
 
   const hamBurger = document.querySelector("#hamburgerid");
-  hamBurger.addEventListener("click", () => {
-
+  hamBurger.addEventListener("click", (e) => {
     e.preventDefault();
-
     const leftSection = document.querySelector(".left-section");
     leftSection.style.left = "-11px";
   });
 
   //cloasing left side bar
   const closeBtn = document.querySelector(".close-button");
-  closeBtn.addEventListener("click", () => {
-
+  closeBtn.addEventListener("click", (e) => {
     e.preventDefault();
-
     const leftSection = document.querySelector(".left-section");
     leftSection.style.left = "-348px";
   });
